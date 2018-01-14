@@ -28,6 +28,7 @@ pipeline, columns, dtypes = reload_pipeline()
 def predict():
     payload = request.get_json()
     observation = payload['observation']
+    observation.update({'id': payload['id']})
     obs = pd.DataFrame([observation], columns=columns).astype(dtypes)
     proba = pipeline.predict_proba(obs)[0, 1]
     return jsonify({
