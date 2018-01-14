@@ -1,7 +1,11 @@
 import json
 import pickle
+
 import pandas as pd
-from flask import Flask, request, jsonify
+from flask import request, jsonify
+
+from lachesis import app
+from lachesis.transformers import ObservationCleaner
 
 
 def reload_pipeline():
@@ -17,9 +21,6 @@ def reload_pipeline():
     return pipeline, columns, dtypes
 
 
-app = Flask(__name__)
-
-
 pipeline, columns, dtypes = reload_pipeline()
 
 
@@ -32,7 +33,3 @@ def predict():
     return jsonify({
         'prediction': proba
     })
-
-if __name__ == '__main__':
-    app.run(debug=True)
-

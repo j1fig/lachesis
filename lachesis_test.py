@@ -1,4 +1,4 @@
-import http
+from http import HTTPStatus
 import json
 import unittest
 
@@ -60,7 +60,7 @@ class LachesisTest(unittest.TestCase):
 
     def test_predict_health(self):
         r = self._public_api_json_request('POST', '/predict', self.good_observation)
-        self.assertEqual(http.OK, r.status_code)
+        self.assertEqual(HTTPStatus.OK, r.status_code)
 
     def test_predict_sanity(self):
         r = self._public_api_json_request('POST', '/predict', self.good_observation)
