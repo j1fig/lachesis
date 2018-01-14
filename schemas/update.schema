@@ -1,0 +1,19 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"title": "Update",
+	"description": "An update for a prediction with the actual verified value.",
+	"type": "object",
+	"properties": {
+        "id": {
+            "description": "The unique identifier for a prediction.",
+            "type": "integer"
+        },
+        "true_class": {
+            "description": "Whether this observation was verified as unemployed (1) or not (0).",
+            "type": "integer",
+			"minimum": 0,
+			"maximum": 1
+        }
+	},
+	"required": ["id", "true_class"]
+}

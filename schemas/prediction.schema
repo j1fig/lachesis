@@ -1,0 +1,60 @@
+{
+	"$schema": "http://json-schema.org/draft-06/schema#",
+	"title": "Prediction",
+	"description": "A request for a prediction for unemployed in 12 months.",
+	"type": "object",
+	"properties": {
+        "id": {
+            "description": "The unique identifier for a prediction.",
+            "type": "integer"
+        },
+		"observation": {
+            "description": "The observation data required to predict.",
+            "type": "object",
+			"properties": {
+				"birth date": {
+					"type": "string"
+				},
+				"job type": {
+					"type": "string"
+				},
+				"school level": {
+					"type": "string"
+				},
+				"domestic status": {
+					"type": "string"
+				},
+				"profession": {
+					"type": "string"
+				},
+				"domestic relationship type": {
+					"type": "string"
+				},
+				"ethnicity": {
+					"type": "string"
+				},
+				"gender": {
+					"type": "string"
+				},
+				"earned dividends": {
+					"type": "number",
+					"minimum": 0
+				},
+				"interest earned": {
+					"type": "number",
+					"minimum": 0
+				},
+				"monthly work": {
+					"type": "number",
+					"minimum": 0,
+					"maximum": 744,
+				},
+				"country of origin": {
+					"type": "string"
+				},
+			},
+			"required": ["birth date", "job type", "school level", "domestic status", "profession", "domestic relationship type", "ethnicity", "gender", "earned dividends", "interest earned", "monthly work", "country of origin"]
+        }
+    },
+    "required": ["id", "observation"]
+}

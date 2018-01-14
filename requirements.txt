@@ -10,3 +10,4 @@ sqlalchemy
 flask-sqlalchemy
 psycopg2
 category_encoders
+jsonschema
