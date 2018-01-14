@@ -94,5 +94,13 @@ class LachesisTest(unittest.TestCase):
         )
         self.assertEqual(HTTPStatus.BAD_REQUEST, r.status_code)
 
+    def test_predict_empty_observation(self):
+        r = self._public_api_json_request(
+            'POST',
+            '/predict',
+            {'id': 2345, 'observation': {}}
+        )
+        self.assertEqual(HTTPStatus.BAD_REQUEST, r.status_code)
+
 if __name__ == '__main__':
     unittest.main()
