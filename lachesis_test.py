@@ -26,8 +26,7 @@ class LachesisTest(unittest.TestCase):
                 "earned dividends": 0,
                 "interest earned": 0,
                 "monthly work": 160,
-                "country of origin": "u.s.",
-                "target": 1
+                "country of origin": "u.s."
             }
         }
 
