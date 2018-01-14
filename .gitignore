@@ -1,0 +1,3 @@
+*.swp
+.lachesis
+__pycache__/

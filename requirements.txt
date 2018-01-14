@@ -4,4 +4,9 @@ scikit-learn
 pandas
 jupyter
 matplotlib
-
+flask
+gunicorn
+sqlalchemy
+flask-sqlalchemy
+psycopg2
+category_encoders
