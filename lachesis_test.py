@@ -10,8 +10,9 @@ class LachesisTest(unittest.TestCase):
     def setUp(self):
         lachesis.app.testing = True
         self.c = lachesis.app.test_client()
-        # with lachesis.app.app_context():
-        #     lachesis.init_db()
+        with lachesis.app.app_context():
+            lachesis.clear_db()
+            lachesis.init_db()
         self.good_observation = {
             "id": 1,
             "observation": {
