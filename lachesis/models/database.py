@@ -12,6 +12,7 @@ def clear_db():
 
 
 def init_db():
+    print('Initializaing database with: {}'.format(settings.DATABASE_URL))
     db.create_all()
 
 
