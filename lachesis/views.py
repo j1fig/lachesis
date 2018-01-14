@@ -4,6 +4,7 @@ import pickle
 import pandas as pd
 from flask import request, jsonify
 from sqlalchemy.exc import IntegrityError
+from werkzeug.exceptions import BadRequest
 
 from lachesis import app
 from lachesis.transformers import ObservationCleaner
@@ -29,7 +30,7 @@ pipeline, columns, dtypes = reload_pipeline()
 @app.errorhandler(IntegrityError)
 def handle_invalid_schema(error):
     response = jsonify({
-        'message': error.detail
+        'message': 'Invalid schema for message',
     })
     response.status_code = 400
     return response
@@ -39,6 +40,9 @@ def handle_invalid_schema(error):
 def predict():
     payload = request.get_json()
     print(payload)
+    if any([p not in payload for p in ('observation', 'id')]):
+        raise BadRequest('Missing `observation` or `id` mandatory fields')
+
     observation = payload['observation']
     observation_id = payload['id']
     observation.update({'id': observation_id})
@@ -55,3 +59,16 @@ def predict():
     return jsonify({
         'prediction': proba
     })
+
+
+@app.route('/update', methods=['POST'])
+def update():
+    payload = request.get_json()
+    print(payload)
+    if any([p not in payload for p in ('true_class', 'id')]):
+        raise BadRequest('Missing `true_class` or `id` mandatory fields')
+
+    p = Prediction.query.filter_by(observation_id=payload['id']).get_or_404()
+    p.true_class = obs['true_class']
+    db.session.commit()
+    return jsonify(p.to_dict())

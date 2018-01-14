@@ -78,5 +78,21 @@ class LachesisTest(unittest.TestCase):
         r = self._public_api_json_request('POST', '/predict', self.good_observation)
         self.assertEqual(HTTPStatus.BAD_REQUEST, r.status_code)
 
+    def test_predict_missing_id(self):
+        r = self._public_api_json_request(
+            'POST',
+            '/predict',
+            {'observation': {'meh': 'hah!'}}
+        )
+        self.assertEqual(HTTPStatus.BAD_REQUEST, r.status_code)
+
+    def test_predict_missing_observation(self):
+        r = self._public_api_json_request(
+            'POST',
+            '/predict',
+            {'id': 2345}
+        )
+        self.assertEqual(HTTPStatus.BAD_REQUEST, r.status_code)
+
 if __name__ == '__main__':
     unittest.main()
