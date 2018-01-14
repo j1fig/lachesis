@@ -26,6 +26,7 @@ classifier, columns, dtypes = reload_classifier()
 @app.route('/predict', methods=['POST'])
 def predict():
     payload = request.get_json()
+    print(payload)
     obs = pd.DataFrame([payload], columns=columns).astype(dtypes)
     proba = classifier.predict_proba(obs)[0, 1]
     return jsonify({
