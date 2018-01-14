@@ -3,6 +3,7 @@ import pickle
 
 import pandas as pd
 from flask import request, jsonify
+from sqlalchemy.exc import IntegrityError
 
 from lachesis import app
 from lachesis.transformers import ObservationCleaner
@@ -23,6 +24,15 @@ def reload_pipeline():
 
 
 pipeline, columns, dtypes = reload_pipeline()
+
+
+@app.errorhandler(IntegrityError)
+def handle_invalid_schema(error):
+    response = jsonify({
+        'message': error.detail
+    })
+    response.status_code = 400
+    return response
 
 
 @app.route('/predict', methods=['POST'])

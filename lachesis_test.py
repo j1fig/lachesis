@@ -72,5 +72,11 @@ class LachesisTest(unittest.TestCase):
             json.loads(r.data)['prediction'] <= 1.0
         )
 
+    def test_predict_duplicate(self):
+        r = self._public_api_json_request('POST', '/predict', self.good_observation)
+        self.assertEqual(HTTPStatus.OK, r.status_code)
+        r = self._public_api_json_request('POST', '/predict', self.good_observation)
+        self.assertEqual(HTTPStatus.BAD_REQUEST, r.status_code)
+
 if __name__ == '__main__':
     unittest.main()
