@@ -28,9 +28,9 @@ pipeline, columns, dtypes = reload_pipeline()
 
 
 @app.errorhandler(IntegrityError)
-def handle_invalid_schema(error):
+def handle_duplicate_observation(error):
     response = jsonify({
-        'message': 'Invalid schema for message',
+        'message': 'Duplicate observation',
     })
     response.status_code = 400
     return response
