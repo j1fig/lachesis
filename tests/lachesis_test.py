@@ -66,10 +66,10 @@ class LachesisTest(unittest.TestCase):
     def test_predict_sanity(self):
         r = self._public_api_json_request('POST', '/predict', self.good_observation)
         self.assertTrue(
-            json.loads(r.data)['prediction'] >= 0
+            json.loads(r.data)['proba'] >= 0
         )
         self.assertTrue(
-            json.loads(r.data)['prediction'] <= 1.0
+            json.loads(r.data)['proba'] <= 1.0
         )
 
     def test_predict_duplicate(self):

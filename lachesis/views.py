@@ -57,7 +57,7 @@ def predict():
     )
     db.session.commit()
     return jsonify({
-        'prediction': proba
+        'proba': proba
     })
 
 
